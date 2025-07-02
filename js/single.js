@@ -5,12 +5,15 @@ const menuIcon = document.getElementById("menuIcon");
 
 let sidebarOpen = false;
 
-toggleBtn.addEventListener("click", () => {
+toggleBtn.addEventListener("click", () =>
+{
   sidebarOpen = !sidebarOpen;
-  if (sidebarOpen) {
+  if (sidebarOpen)
+  {
     sidebar.classList.remove("-translate-x-full");
     menuIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />`; // X icon
-  } else {
+  } else
+  {
     sidebar.classList.add("-translate-x-full");
     menuIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />`; // Bars icon
   }
@@ -18,7 +21,8 @@ toggleBtn.addEventListener("click", () => {
 
 //  Ship Paste Address
 const ShipPasteAddressBtn = document.getElementById("ShipPasteAddress");
-ShipPasteAddressBtn.addEventListener("click", () => {
+ShipPasteAddressBtn.addEventListener("click", () =>
+{
   const ShipPasteAddressTextarea = document.getElementById(
     "ShipPasteAddressTextarea"
   );
@@ -27,28 +31,35 @@ ShipPasteAddressBtn.addEventListener("click", () => {
 })
 
 // Toggle Dynamically All Checkbox
-function toggleDynamicallyChackbox(CheckboxId, InputWrapperId) {
+function toggleDynamicallyChackbox (CheckboxId, InputWrapperId)
+{
   const checkbox = document.getElementById(CheckboxId);
   const inputWrapper = document.getElementById(InputWrapperId);
 
-  checkbox.addEventListener("change", () => {
+  checkbox.addEventListener("change", () =>
+  {
     inputWrapper.classList.toggle("hidden", !checkbox.checked);
   });
 }
 
 /* ****Input Section**** */
-function updateFloatingLabels() {
+function updateFloatingLabels ()
+{
   const wrappers = document.querySelectorAll(".floating-label-wrapper");
 
-  wrappers.forEach((wrapper) => {
+  wrappers.forEach((wrapper) =>
+  {
     const input = wrapper.querySelector(".floating-input");
     const label = wrapper.querySelector(".floating-label");
 
-    const updateLabel = () => {
-      if (document.activeElement === input || input.value.length > 0) {
+    const updateLabel = () =>
+    {
+      if (document.activeElement === input || input.value.length > 0)
+      {
         label.classList.add("small");
         label.classList.remove("large");
-      } else {
+      } else
+      {
         label.classList.add("large");
         label.classList.remove("small");
       }
@@ -71,21 +82,24 @@ document.addEventListener("DOMContentLoaded", updateFloatingLabels);
 toggleDynamicallyChackbox("rubberStampCheckbox", "rubberStampInputs");
 
 /* ****Ship From**** */
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () =>
+{
   const shipFromWrapper = document.getElementById("shipFromWrapper");
   const shipFromSelect = document.getElementById("shipFromSelect");
   const shipFromOption = document.getElementById("shipFromOption");
-
+  const caret = document.getElementById("shipFormCaretIcon");
   // Internal state
   let checkedBoxes = {
     ShipFrom: false,
   };
 
   // Toggle handler
-  shipFromSelect.addEventListener("click", () => {
+  shipFromSelect.addEventListener("click", () =>
+  {
     checkedBoxes.ShipFrom = !checkedBoxes.ShipFrom;
 
-    if (checkedBoxes.ShipFrom) {
+    if (checkedBoxes.ShipFrom)
+    {
       shipFromWrapper.classList.remove(
         "border-gray-300",
         "bg-gradient-to-b",
@@ -93,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "to-[#ebebebeb]"
       );
       shipFromWrapper.classList.add("border-[#00a9ff]");
+      caret.classList.add("rotate-180");
 
       shipFromOption.classList.remove("hidden");
       shipFromSelect.classList.add(
@@ -101,7 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "hover:border-[#00a9ff]",
         "hover:bg-[#d9f2ff]"
       );
-    } else {
+    } else
+    {
       shipFromWrapper.classList.add(
         "border-gray-300",
         "bg-gradient-to-b",
@@ -117,11 +133,14 @@ document.addEventListener("DOMContentLoaded", () => {
         "hover:border-[#00a9ff]",
         "hover:bg-[#d9f2ff]"
       );
+      caret.classList.remove("rotate-180");
     }
   });
 });
 
-/* ****Ship From**** */
+// State
+let showCards = false;
+/* ****Type of Packaging**** */
 const PackagingCardsData = [
   {
     id: 1,
@@ -224,47 +243,48 @@ const PackagingCardsData = [
     image: "/assets/images/04.png",
   },
 ];
-
-// State
-let showCards = false;
-/* ****Type of Packaging**** */
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () =>
+{
   const toggleCard = document.getElementById("toggleCard");
   const cardContainer = document.getElementById("packagingCardsContainer");
   const wrapper = document.getElementById("packagingWrapper");
-
-  toggleCard.addEventListener("click", () => {
+  const caret = document.getElementById("caretIcon");
+  toggleCard.addEventListener("click", () =>
+  {
     showCards = !showCards;
     cardContainer.innerHTML = "";
     toggleCard.classList.add("hover:bg-[#d9f2ff]");
 
-    if (showCards) {
+    if (showCards)
+    {
       wrapper.classList.remove("border-gray-300");
       wrapper.classList.add("border-[#00a9ff]");
-      PackagingCardsData.forEach((card, index) => {
+      caret.classList.add("rotate-180");
+      PackagingCardsData.forEach((card, index) =>
+      {
         const cardDiv = document.createElement("div");
-        cardDiv.className = `w-full flex items-center justify-between p-[10px] border-[#ccc] hover:border-[#00a9ff] cursor-pointer ${
-          index === 0 ? "border-t-[1px]" : ""
-        } ${
-          index !== PackagingCardsData.length - 1 ? "border-b-[1px]" : ""
-        } hover:bg-[#d9f2ff]`;
+        cardDiv.className = `w-full flex items-center justify-between p-[10px] border-[#ccc] hover:border-[#00a9ff] cursor-pointer ${ index === 0 ? "border-t-[1px]" : ""
+          } ${ index !== PackagingCardsData.length - 1 ? "border-b-[1px]" : ""
+          } hover:bg-[#d9f2ff]`;
 
         cardDiv.innerHTML = `
           <div class="flex items-center">
-            <img src="${card.image}" alt="Parcel" class="w-[130px] h-[130px] object-cover" />
+            <img src="${ card.image }" alt="Parcel" class="w-[130px] h-[130px] object-cover" />
             <div class="ml-[.9em]">
-              <h1 class="text-[1em] font-[400] text-[#030303]">${card.title}</h1>
-              <p class="text-[.824em] font-[400] text-[#999] mt-[3px]">${card.description}</p>
+              <h1 class="text-[1em] font-[400] text-[#030303]">${ card.title }</h1>
+              <p class="text-[.824em] font-[400] text-[#999] mt-[3px]">${ card.description }</p>
             </div>
           </div>
         `;
 
         cardContainer.appendChild(cardDiv);
       });
-    } else {
+    } else
+    {
       toggleCard.classList.remove("hover:bg-[#d9f2ff]");
       wrapper.classList.add("border-gray-300");
       wrapper.classList.remove("border-[#00a9ff]");
+      caret.classList.remove("rotate-180");
     }
   });
 });
@@ -273,7 +293,8 @@ document.addEventListener("DOMContentLoaded", () => {
 toggleDynamicallyChackbox("insuranceCheckbox", "insuranceInputWrapper");
 
 /* ****Extra Services**** */
-function ExtraServicesWrapper() {
+function ExtraServicesWrapper ()
+{
   const ExtraServicesCheckbox = document.getElementById(
     "ExtraServicesCheckbox"
   );
@@ -285,7 +306,8 @@ function ExtraServicesWrapper() {
     "ExtraServicesWrapperMinusIcon"
   );
 
-  ExtraServicesCheckbox.addEventListener("click", () => {
+  ExtraServicesCheckbox.addEventListener("click", () =>
+  {
     inputWrapperPlusIcon.classList.toggle("hidden");
     inputWrapperMinusIcon.classList.toggle("hidden");
     inputWrapper.classList.toggle("hidden");
@@ -294,7 +316,8 @@ function ExtraServicesWrapper() {
 ExtraServicesWrapper();
 /* ****Extra Services**** --- Inside */
 /* ****Signature Confirmation**** */
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () =>
+{
   const mainCheckbox = document.getElementById("signatureCheckbox");
   const optionsWrapper = document.getElementById("signatureOptionsWrapper");
   const signatureToggle = document.getElementById("signatureToggle");
@@ -302,10 +325,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let optionOpen = false;
 
-  mainCheckbox.addEventListener("change", () => {
-    if (mainCheckbox.checked) {
+  mainCheckbox.addEventListener("change", () =>
+  {
+    if (mainCheckbox.checked)
+    {
       optionsWrapper.classList.remove("hidden");
-    } else {
+    } else
+    {
       optionsWrapper.classList.add("hidden");
       signatureOption.classList.add("hidden");
       optionOpen = false;
@@ -321,10 +347,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  signatureToggle.addEventListener("click", () => {
+  signatureToggle.addEventListener("click", () =>
+  {
     optionOpen = !optionOpen;
 
-    if (optionOpen) {
+    if (optionOpen)
+    {
       signatureOption.classList.remove("hidden");
       optionsWrapper.classList.remove(
         "border-gray-300",
@@ -339,7 +367,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "border-[#ccc]",
         "hover:border-[#00a9ff]"
       );
-    } else {
+    } else
+    {
       signatureOption.classList.add("hidden");
       optionsWrapper.classList.add(
         "border-gray-300",
@@ -365,25 +394,29 @@ let IrregularPackageCheck = false;
 
 document
   .getElementById("signatureCheckbox")
-  .addEventListener("change", function () {
+  .addEventListener("change", function ()
+  {
     const isChecked = this.checked; // true if checked, false if not
     signatureCheckboxCheck = isChecked;
   });
 document
   .getElementById("qualifiesforMediaMail")
-  .addEventListener("change", function () {
+  .addEventListener("change", function ()
+  {
     const isChecked = this.checked; // true if checked, false if not
     qualifiesforMediaMailCheck = isChecked;
   });
 document
   .getElementById("IrregularPackage")
-  .addEventListener("change", function () {
+  .addEventListener("change", function ()
+  {
     const isChecked = this.checked; // true if checked, false if not
     IrregularPackageCheck = isChecked;
   });
 
 // Function to update the title based on checkbox states
-if (signatureCheckboxCheck === true) {
+if (signatureCheckboxCheck === true)
+{
   extraServicesTittle.removeChild(document.getElementById("NoExtraServicesSpan"));
   const span = document.createElement("span");
   span.id = "signatureConfirmationSpan";
@@ -404,7 +437,8 @@ toggleDynamicallyChackbox("CustomsFormCheckbox", "CustomsFormInputWrapper");
 toggleDynamicallyChackbox("SavePackageCheckbox", "SavePackageInputWrapper");
 
 /* ****Package Content Type**** */
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () =>
+{
   const wrapper = document.getElementById("packageContentTypeWrapper");
   const toggle = document.getElementById("packageToggle");
   const option1 = document.getElementById("contentOption1");
@@ -412,10 +446,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let isOpen = false;
 
-  toggle.addEventListener("click", () => {
+  toggle.addEventListener("click", () =>
+  {
     isOpen = !isOpen;
 
-    if (isOpen) {
+    if (isOpen)
+    {
       // Styling on open
       wrapper.classList.remove(
         "border-gray-300",
@@ -434,7 +470,8 @@ document.addEventListener("DOMContentLoaded", () => {
       // Show content options
       option1.classList.remove("hidden");
       option2.classList.remove("hidden");
-    } else {
+    } else
+    {
       // Reset styling
       wrapper.classList.add(
         "border-gray-300",
